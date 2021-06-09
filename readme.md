@@ -6,3 +6,7 @@
   2. ts-node
   3. tslint-config-prettier
   4. nodemon
+  5. graphql-yoga
+  6. morgan
+  7. helmet
+  8. cors
