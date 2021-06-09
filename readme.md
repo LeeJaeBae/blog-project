@@ -10,3 +10,5 @@
   6. morgan
   7. helmet
   8. cors
+  9. graphql-tools
+  10. merge-graphql-schemas
