@@ -28,6 +28,7 @@
 		"typescript": "^4.3.2"
 	},
 	"dependencies": {
+		"class-validator": "^0.13.1",
 		"cors": "^2.8.5",
 		"dotenv": "^10.0.0",
 		"graphql-middleware": "^6.0.10",
