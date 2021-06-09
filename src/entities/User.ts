@@ -32,6 +32,15 @@ class User extends BaseEntity {
 	@CreateDateColumn() createAt: string;
 	@UpdateDateColumn() updateAt: string;
 
+	@BeforeInsert()
+	@BeforeUpdate()
+	async savePassword(): Promise<void> {
+		if (this.password) {
+			const hashedPassword = await this.hashPassword(this.password);
+			this.password = hashedPassword;
+		}
+	}
+
 	get fullName(): string {
 		return `${this.firstName} ${this.lastName}`;
 	}
@@ -40,13 +49,8 @@ class User extends BaseEntity {
 		return bcrypt.hash(password, BCRYPT_ROUNDS);
 	}
 
-	@BeforeInsert()
-	@BeforeUpdate()
-	async savePassword(): Promise<void> {
-		if (this.password) {
-			const hashedPassword = await this.hashPassword(this.password);
-			this.password = hashedPassword;
-		}
+	public comparePassword(password: string): Promise<boolean> {
+		return bcrypt.compare(password, this.password);
 	}
 }
 export default User;

@@ -1,3 +1,11 @@
-type Query {
-  sayHello: String!
+type User {
+  id: Int!
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String
+  profilePhoto: String
+  createAt: String!
+  updateAt: String!
+  fullName: String
 }
