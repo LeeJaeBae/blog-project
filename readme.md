@@ -15,3 +15,6 @@
   11. graphql-middleware
   12. graphql-to-typescript
   13. gql-merge
+  14. typeorm
+  15. pg
+  16. class-validator
