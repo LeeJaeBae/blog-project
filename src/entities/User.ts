@@ -23,10 +23,10 @@ class User extends BaseEntity {
 	firstName: string;
 	@Column({ type: 'text' })
 	lastName: string;
-	@Column({ type: 'string' })
+	@Column({ type: 'text' })
 	password: string;
 
-	@Column({ type: 'string' })
+	@Column({ type: 'text' })
 	profilePhoto: string;
 
 	@CreateDateColumn() createAt: string;

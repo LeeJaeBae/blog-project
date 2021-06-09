@@ -1,0 +1,7 @@
+type Content {
+	id: Int!
+	writer: User!
+	context: String!
+	createAt: String!
+	updateAt: String
+}

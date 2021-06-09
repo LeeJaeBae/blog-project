@@ -9,3 +9,7 @@ type User {
   updateAt: String!
   fullName: String
 }
+
+type Query {
+  user: User
+}
