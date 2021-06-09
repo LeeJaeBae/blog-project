@@ -18,3 +18,4 @@
   14. typeorm
   15. pg
   16. class-validator
+  17. bcrypt
