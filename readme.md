@@ -12,3 +12,6 @@
   8. cors
   9. graphql-tools
   10. merge-graphql-schemas
+  11. graphql-middleware
+  12. graphql-to-typescript
+  13. gql-merge
