@@ -19,3 +19,4 @@
   15. pg
   16. class-validator
   17. bcrypt
+  18. jsonwebtoken
