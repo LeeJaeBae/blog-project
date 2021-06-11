@@ -1,3 +1,46 @@
+type Chat {
+  id: Int!
+  messages: [Message]!
+  participants: [User]!
+  createAt: String!
+  updateAt: String
+}
+
+type Message {
+  id: Int!
+  text: String!
+  chat: Chat!
+  user: User!
+  userId: Int!
+  createAt: String!
+  updateAt: String
+}
+
+type Content {
+  id: Int!
+  writer: User!
+  context: String!
+  createAt: String!
+  updateAt: String
+}
+
+type EmailSignInResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
+type Mutation {
+  EmailSignIn(email: String!, password: String!): EmailSignInResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+}
+
+type EmailSignUpResponse {
+  ok: Boolean!
+  error: String
+  token: String
+}
+
 type User {
   id: Int!
   email: String!
@@ -5,6 +48,9 @@ type User {
   lastName: String!
   password: String
   profilePhoto: String
+  content: [Content]
+  chat: Chat
+  messages: [Message]
   createAt: String!
   updateAt: String!
   fullName: String
