@@ -5,6 +5,9 @@ type User {
 	lastName: String!
 	password: String
 	profilePhoto: String
+	content: [Content]
+	chat: Chat
+	messages: [Message]
 	createAt: String!
 	updateAt: String!
 	fullName: String

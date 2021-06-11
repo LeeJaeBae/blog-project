@@ -7,9 +7,14 @@ import {
 	Column,
 	CreateDateColumn,
 	Entity,
+	ManyToOne,
+	OneToMany,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from 'typeorm';
+import Content from './Content';
+import Chat from './Chat';
+import Message from './Message';
 
 const BCRYPT_ROUNDS = 10;
 @Entity()
@@ -28,6 +33,15 @@ class User extends BaseEntity {
 
 	@Column({ type: 'text' })
 	profilePhoto: string;
+
+	@OneToMany((type) => Content, (content) => content.writher)
+	content: Content[];
+
+	@ManyToOne((type) => Chat, (chat) => chat.participants)
+	chat: Chat;
+
+	@OneToMany((type) => Message, (message) => message.user)
+	messages: Message[];
 
 	@CreateDateColumn() createAt: string;
 	@UpdateDateColumn() updateAt: string;
