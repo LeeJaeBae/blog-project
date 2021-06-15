@@ -32,13 +32,24 @@ type EmailSignInResponse {
 
 type Mutation {
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
-  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!
+  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, phoneNumber: String!): EmailSignUpResponse!
 }
 
 type EmailSignUpResponse {
   ok: Boolean!
   error: String
   token: String
+}
+
+type GetMyProfileResponse {
+  ok: Boolean!
+  error: String
+  user: User
+}
+
+type Query {
+  GetMyProfile: GetMyProfileResponse!
+  user: User
 }
 
 type User {
@@ -54,8 +65,4 @@ type User {
   createAt: String!
   updateAt: String!
   fullName: String
-}
-
-type Query {
-  user: User
 }

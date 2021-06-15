@@ -1,24 +1,28 @@
 import { Resolvers } from 'src/types/resolvers';
 import { EmailSignUpMutationArgs, EmailSignUpResponse } from 'src/types/graph';
-import User from 'src/entities/User';
+import User from '../../../entities/User';
+import createJWT from '../../../utils/createJWT';
+
 const resolvers: Resolvers = {
 	Mutation: {
-		EmailSingUp: async (_, args: EmailSignUpMutationArgs): Promise<EmailSignUpResponse> => {
+		EmailSignUp: async (_, args: EmailSignUpMutationArgs): Promise<EmailSignUpResponse> => {
 			try {
 				const { email } = args;
 				const existingUser = await User.findOne({ email });
 				if (existingUser) {
 					return {
 						ok: false,
-						error: 'existing email. You should log in instead',
+						error: 'existing email',
 						token: null,
 					};
 				} else {
-					const newUser = await User.create({ ...args });
+					const newUser = await User.create({ ...args }).save();
+					console.log(newUser);
+					const token = createJWT(newUser.id);
 					return {
 						ok: true,
 						error: null,
-						token: '',
+						token: token,
 					};
 				}
 			} catch (error) {
@@ -31,3 +35,5 @@ const resolvers: Resolvers = {
 		},
 	},
 };
+
+export default resolvers;

@@ -19,19 +19,20 @@ import Message from './Message';
 const BCRYPT_ROUNDS = 10;
 @Entity()
 class User extends BaseEntity {
-	@PrimaryGeneratedColumn() id: number;
+	@PrimaryGeneratedColumn('increment') id: string;
 
 	@IsEmail()
+	@Column({ type: 'text' })
 	email: string;
 
 	@Column({ type: 'text' })
 	firstName: string;
 	@Column({ type: 'text' })
 	lastName: string;
-	@Column({ type: 'text' })
+	@Column({ type: 'text', nullable: true })
 	password: string;
 
-	@Column({ type: 'text' })
+	@Column({ type: 'text', nullable: true })
 	profilePhoto: string;
 
 	@OneToMany((type) => Content, (content) => content.writher)

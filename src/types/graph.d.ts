@@ -1,7 +1,14 @@
-export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  createAt: String!\n  updateAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  userId: Int!\n  createAt: String!\n  updateAt: String\n}\n\ntype Content {\n  id: Int!\n  writer: User!\n  context: String!\n  createAt: String!\n  updateAt: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, age: Int!, phoneNumber: String!): EmailSignUpResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype User {\n  id: Int!\n  email: String!\n  firstName: String!\n  lastName: String!\n  password: String\n  profilePhoto: String\n  content: [Content]\n  chat: Chat\n  messages: [Message]\n  createAt: String!\n  updateAt: String!\n  fullName: String\n}\n\ntype Query {\n  user: User\n}\n"];
+export const typeDefs = ["type Chat {\n  id: Int!\n  messages: [Message]!\n  participants: [User]!\n  createAt: String!\n  updateAt: String\n}\n\ntype Message {\n  id: Int!\n  text: String!\n  chat: Chat!\n  user: User!\n  userId: Int!\n  createAt: String!\n  updateAt: String\n}\n\ntype Content {\n  id: Int!\n  writer: User!\n  context: String!\n  createAt: String!\n  updateAt: String\n}\n\ntype EmailSignInResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype Mutation {\n  EmailSignIn(email: String!, password: String!): EmailSignInResponse!\n  EmailSignUp(firstName: String!, lastName: String!, email: String!, password: String!, profilePhoto: String!, phoneNumber: String!): EmailSignUpResponse!\n}\n\ntype EmailSignUpResponse {\n  ok: Boolean!\n  error: String\n  token: String\n}\n\ntype GetMyProfileResponse {\n  ok: Boolean!\n  error: String\n  user: User\n}\n\ntype Query {\n  GetMyProfile: GetMyProfileResponse!\n  user: User\n}\n\ntype User {\n  id: Int!\n  email: String!\n  firstName: String!\n  lastName: String!\n  password: String\n  profilePhoto: String\n  content: [Content]\n  chat: Chat\n  messages: [Message]\n  createAt: String!\n  updateAt: String!\n  fullName: String\n}\n"];
 /* tslint:disable */
 
 export interface Query {
+  GetMyProfile: GetMyProfileResponse;
+  user: User | null;
+}
+
+export interface GetMyProfileResponse {
+  ok: boolean;
+  error: string | null;
   user: User | null;
 }
 
@@ -62,7 +69,6 @@ export interface EmailSignUpMutationArgs {
   email: string;
   password: string;
   profilePhoto: string;
-  age: number;
   phoneNumber: string;
 }
 
