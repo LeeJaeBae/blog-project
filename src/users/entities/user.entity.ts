@@ -1,13 +1,19 @@
 import * as argon2 from 'argon2';
 import { IsEmail } from 'class-validator';
-import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
-@Entity('user')
+@Entity()
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 32, type: 'text' })
+  @Column({ type: 'text' })
   username: string;
   @IsEmail()
   @Column({ unique: true })
@@ -16,9 +22,17 @@ export class User {
   password: string;
 
   @BeforeInsert()
+  @BeforeUpdate()
   private hashPassword = async (): Promise<void> => {
-    this.password = await argon2.hash(this.password);
+    const password = this.password;
+    this.password = await argon2.hash(password);
   };
   @Column({ default: '' })
   imageLink: string;
+
+  // static findByName(username: string) {
+  //   return this.createQueryBuilder('user')
+  //     .where('user.username = "username', { username })
+  //     .getOne();
+  // }
 }
